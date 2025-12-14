@@ -2,8 +2,34 @@
 Transliteration Hindi, bengali, tamil
 
 
-Multilingual Transliteration Model (mT5 + CTranslate2)This project implements a sequence-to-sequence model for multilingual transliteration across three Indic languages, optimized for high-speed inference using CTranslate2, and deployed on Hugging Face Spaces.Live Demo Link: 1 [RANDOM: INSERT YOUR HUGGING FACE SPACES URL HERE]1. Project OverviewThe objective was to build and deploy a model that converts Romanized text (e.g., "Namaste") into the native script of three target Indic languages (e.g., "नमस्ते"). 2The project focused heavily on model optimization for faster inference. 3Model Architecture: Fine-tuned mT5-Small (Sequence-to-Sequence) 44Target Languages: Hindi (HIN), Bengali (BEN), and Tamil (TAM) 5Optimization Engine: CTranslate2 (INT8 Quantization) 6Deployment Framework: Gradio on Hugging Face Spaces 772. Setup and InstallationA. Environment SetupThe primary environment used for training and optimization was a [RANDOM: GPU TYPE, e.g., Colab T4/A100 GPU].B. RequirementsInstall the necessary Python packages using the provided requirements.txt: 8Bashpip install -r requirements.txt
-Key Dependencies:transformersdatasetsacceleratectranslate2gradio3. Training Process and Hyperparameters 9The model was fine-tuned from the pre-trained google/mt5-small checkpoint on the Aksharantar dataset. 101010A. Dataset PreprocessingDataset Source: ai4bharat/Aksharantar 11Data Size: Approximately [RANDOM: 50,000] examples per language were sampled for training.Preprocessing: Inputs were prefixed with language tokens (e.g., <hin> for Hindi) and tokenized using the mT5 tokenizer.Train/Validation Split: [RANDOM: 90/10] split ratio. 12B. Final Stable Training ParametersParameterValue (Stable)NoteBase Modelgoogle/mt5-smallSequence-to-sequence architecture.num_train_epochs[RANDOM: 5]Increased from initial attempts for better convergence.learning_rate$3 \mathrm{e}-5$Crucial Fix: Reduced from original (e.g., $1 \mathrm{e}-4$) to prevent nan loss.per_device_train_batch_size[RANDOM: 16]Set to utilize available GPU memory.Precisionfp16=FalseCrucial Fix: Disabled 16-bit precision for numerical stability.OptimizerAdamW with default settings.C. Evaluation MetricsMetricResult (After Re-training)Validation Loss[RANDOM: 0.25]Character Error Rate (CER)[RANDOM: 0.12]Word Error Rate (WER)[RANDOM: 0.45]4. Model Optimization (CTranslate2) 13The PyTorch model was converted to CTranslate2 format for accelerated, production-ready inference. 14A. Conversion Command (Example) 15Bashct2-convert --model "path/to/pytorch_model" \
-            --output_dir "ct2_transliteration_model_int8" \
-            --quantization "int8"
-B. Benchmarking Results 16The CTranslate2 optimization yielded significant gains in model size and inference speed.MetricPyTorch Model (Original)CTranslate2 (INT8)Model Size 17$1.15 \text{ GB}$ (Approx.)$288 \text{ MB}$Size ReductionN/A$\sim 75\%$Inference Latency (per request) 18[RANDOM: 85 ms][RANDOM: 25 ms]Speed Gain Percentage 19N/A[RANDOM: 240%] FasterC. Quality CheckThe CTranslate2 INT8 model maintained high quality with minimal loss:Accuracy Loss: [RANDOM: < 1%] (Minimal loss observed after quantization). 205. Deployment and Usage 21The optimized model is deployed on Hugging Face Spaces using Gradio for an interactive demo. 22A. Local Setup Instructions 23Clone this repository: git clone [YOUR REPO URL]Install requirements: pip install -r requirements.txtEnsure the optimized model files (model.bin, spiece.model, etc.) are in the root directory.Run the Gradio app: python app.pyB. Sample Outputs 24Romanized InputHindi OutputBengali OutputTamil OutputNamaste aap kya kar rahe hoनमस्ते आप क्या कर रहे होনমস্তে আপ ক্য়া কর রহে হোநமஸ்தே ஆப் க்யா கர் ரஹே ஹோBharat desh mahanभारत देश महानভারত দেশ মহানபாரத் தேஷ் மஹான்Transliterationट्रांसलिटरेशनট্রান্সলিটারেশনடிரான்ஸ்லிட்டரேஷன்6. Challenges and Improvements 2525A. Challenges Faced (Brief Report) 26Deployment Failure: The biggest challenge was persistent deployment failure on Hugging Face Spaces due to the 1 GB storage limit and missing tokenizer files. This was solved by purging large files from Git history and meticulously ensuring all 8 required configuration files (spiece.model, model.bin, etc.) were present in the root.Model Instability: The initial training run failed with nan loss. This was solved by reducing the learning rate and disabling fp16 (or switching to bf16) for numerical stability.B. Potential Improvements 27Larger Base Model: Experiment with mT5-Base for potential accuracy gains.Increased Dataset Size: Use a much larger portion of the Aksharantar dataset to improve generalization.Advanced Decoding: Implement faster decoding strategies using CTranslate2 specific features.
+# Multilingual Transliteration Model (mT5 + CTranslate2)
+
+This project implements a sequence-to-sequence model for multilingual transliteration across three Indic languages, optimized for high-speed inference using CTranslate2, and deployed on Hugging Face Spaces.
+
+**Live Demo Link:** **[FILL IN LATER: INSERT YOUR HUGGING FACE SPACES URL HERE]**
+
+---
+
+## 1. Project Objective and Architecture
+
+The objective was to build, optimize, and deploy a system that converts Romanized text (e.g., "Namaste") into the native script of three target Indic languages (e.g., "नमस्ते").
+
+* **Model Architecture:** Fine-tuned mT5-Small (Sequence-to-Sequence)
+* **Target Languages:** Hindi (HIN), Bengali (BEN), and Tamil (TAM)
+* **Optimization Engine:** CTranslate2 (INT8 Quantization)
+* **Deployment Framework:** Gradio on Hugging Face Spaces
+
+---
+
+## 2. Setup and Installation
+
+### A. Environment Setup
+
+The primary environment used for training and optimization was a **[FILL IN LATER: GPU TYPE, e.g., Colab T4/A100 GPU]**.
+
+### B. Requirements
+
+Install the necessary Python packages using the provided `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
