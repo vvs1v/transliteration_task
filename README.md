@@ -33,8 +33,8 @@ Install the necessary Python packages using the provided `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
+```
 
----
 ## 3. Preprocessing and Training 
 
 ### A. Preprocess data
@@ -45,7 +45,7 @@ run data.py file with arguments like data_dir, target_language, subset_size, out
 
 ```python
 python data.py --data_dir "path_to_data_files" --subset_size 10000 --target_langs hin ben tam mal
-
+```
 ### B. Train
 
 Change the variables accordingly provide the path to preporcessed data and output dir in the file and run that
