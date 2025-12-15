@@ -6,7 +6,7 @@ Transliteration Hindi, bengali, tamil
 
 This project implements a sequence-to-sequence model for multilingual transliteration across three Indic languages, optimized for high-speed inference using CTranslate2, and deployed on Hugging Face Spaces.
 
-**Live Demo Link:** **[FILL IN LATER: INSERT YOUR HUGGING FACE SPACES URL HERE]**
+**Live Demo Link:** **(https://huggingface.co/spaces/vaibhavsinghal2000/transliteration2)**
 
 ---
 
