@@ -1,0 +1,13 @@
+import ctranslate2
+from ctranslate2.converters import TransformersConverter
+
+model_name_or_path = os.path.join("multilingual_transliteration_model", "final_best_model")
+output_dir = "ct2_transliteration_model_int8"
+
+# Initialize the converter using the correct class name
+converter = TransformersConverter(model_name_or_path)
+
+# Convert the model
+converter.convert(output_dir, quantization="int8") # define the output_dir path and quantization type
+
+print(f"Model successfully converted and saved to {output_dir}")
