@@ -34,6 +34,7 @@ Install the necessary Python packages using the provided `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 
+---
 ## 3. Preprocessing and Training 
 
 ### A. Preprocess data
@@ -49,14 +50,17 @@ python data.py --data_dir "path_to_data_files" --subset_size 10000 --target_lang
 
 Change the variables accordingly provide the path to preporcessed data and output dir in the file and run that
 
+---
 ## 4. Optimization
 
 run ctranslate2_convert to convert the trained model into int8 that may reduce the model size and decrease the inference time
 
+---
 ## 5. BenchMarking
 
 run benchmark.py file to compare the final_best_model to the ctranslate2 optimized model
 
+---
 ## 6. Deployment
 
 Create hugginface account and a space using gradio
